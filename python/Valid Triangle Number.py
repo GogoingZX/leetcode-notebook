@@ -31,5 +31,5 @@ def get_valid_triangle_num(
                 i += 1
     
     return count
-    # Time; O(N^2), where N is number of elements in the array nums
+    # Time: O(N^2), where N is number of elements in the array nums
     # Space: O(sorting)
