@@ -54,51 +54,14 @@ FROM (
         id
         ,visit_date
         ,people
+        ,LAG(people, 2, NULL) OVER (ORDER BY visit_date) AS last_2
+        ,LAG(people, 1, NULL) OVER (ORDER BY visit_date) AS last_1
         ,LEAD(people, 1, NULL) OVER (ORDER BY visit_date) AS next_1
         ,LEAD(people, 2, NULL) OVER (ORDER BY visit_date) AS next_2
     FROM Stadium
     )
 WHERE
-    people >= 100
-    AND next_1 >= 100
-    AND next_2 >= 100
-
-UNION
-SELECT distinct
-    id
-    ,visit_date
-    ,people
-FROM (
-    SELECT
-        id
-        ,visit_date
-        ,people
-        ,LAG(people, 1, NULL) OVER (ORDER BY visit_date) AS last_1
-        ,LAG(people, 2, NULL) OVER (ORDER BY visit_date) AS last_2
-    FROM Stadium
-    )
-WHERE
-    people >= 100
-    AND last_1 >= 100
-    AND last_2 >= 100
-
-UNION
-SELECT distinct
-    id
-    ,visit_date
-    ,people
-FROM (
-    SELECT
-        id
-        ,visit_date
-        ,people
-        ,LAG(people, 1, NULL) OVER (ORDER BY visit_date) AS last_1
-        ,LEAD(people, 1, NULL) OVER (ORDER BY visit_date) AS next_1
-    FROM Stadium
-    )
-WHERE
-    people >= 100
-    AND last_1 >= 100
-    AND next_1 >= 100
-
+    (people >= 100 and next_1 >= 100 and next_2 >= 100)
+    OR (people >= 100 and last_1 >= 100 and last_2 >= 100)
+    OR (people >= 100 and last_1 >= 100 and next_1 >= 100)
 ORDER BY 1
