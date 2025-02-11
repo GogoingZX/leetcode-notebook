@@ -1,14 +1,20 @@
 /*
-Q: Write an SQL query to find all numbers that appear at least three times consecutively.
+- Link; https://leetcode.com/problems/consecutive-numbers/description/?envType=study-plan-v2&envId=top-sql-50
 
-+-------------+---------+
-| Column Name | Type    |
-+-------------+---------+
-| id          | int     |
-| num         | varchar |
-+-------------+---------+
-id is the primary key for this table.
-id is an autoincrement column.
+- Schema:
+    Table: Logs
+    +-------------+---------+
+    | Column Name | Type    |
+    +-------------+---------+
+    | id          | int     |
+    | num         | varchar |
+    +-------------+---------+
+    In SQL, id is the primary key for this table.
+    id is an autoincrement column starting from 1.
+
+- Question:
+    Write an SQL query to find all numbers that appear at least three times consecutively.
+
 */
 
 SELECT distinct
